@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="jar" name="fortify-rule-decry">
+    <property environment="env"/>
+    <property name="dir.src" value="src"/>
+    <property name="dir.build" value="build"/>
+    <property name="dir.dest" value="dest"/>
+    <property name="lib.dir" value="lib" />
+    <path id="fortify-rule-decry.classpath">
+
+        <fileset file="${lib.dir}/*.jar" />
+
+    </path>
+
+    <target name="clean" description="Removing the all generated files.">
+        <delete dir="${dir.build}"/>
+        <delete dir="${dir.dest}"/>
+    </target>
+
+    <target name="prepare" depends="clean">
+        <mkdir dir="${dir.build}"/>
+        <mkdir dir="${dir.dest}"/>
+    </target>
+
+    <target name="compile" depends="prepare" description="Compilation of all source code.">
+        <javac srcdir="${dir.src}" destdir="${dir.build}">
+            <classpath refid="fortify-rule-decry.classpath"/>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile" description="Generates PscNew.jar file in to the 'dest' directory.">
+        <jar jarfile="${dir.dest}/fortify-rule-decry.jar" basedir="${dir.build}">
+            <manifest>
+                <attribute name="Main-Class" value="com.lanju.ui.CommonComponent"/>
+            </manifest>
+        </jar>
+    </target>
+</project>
